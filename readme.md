@@ -1,6 +1,6 @@
 ## AdventureTimeShamBo
 
-![](http://rhizome.s3.amazonaws.com/images/diy/adventuretime_shambo2.svg)
+![](http://rhizome.s3.amazonaws.com/images/diy/adventuretime_shambo3.svg)
 
 Ice King kidnaps Princess Bubblegum commands Finn wins over Marceline frightens Jake wins tough guy competition over Finn kicks Ice King wounds Marceline wins the heart of Princess Bubblegum enlists Jake.
 
