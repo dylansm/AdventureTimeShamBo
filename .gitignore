@@ -1,0 +1,10 @@
+*.bak
+*.log*
+pids
+*.pid
+*.seed
+build
+node_modules
+.npm
+.node_repl_history
+

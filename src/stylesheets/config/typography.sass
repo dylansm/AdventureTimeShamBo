@@ -1,0 +1,18 @@
+@font-face
+  font-family: 'trade-gothic'
+  src: url('~/src/fonts/tradegothic365.eot')
+  src: url('~/src/fonts/tradegothic365.eot') format('embedded-opentype'),
+  url('~/src/fonts/tradegothic365.ttf') format('truetype'),
+  url('~/src/fonts/tradegothic365.woff') format('woff'),
+  url('~/src/fonts/tradegothic365.svg') format('svg')
+
+@mixin tg
+  font-family: 'trade-gothic'
+  font-size: 15px
+  font-style: normal
+  font-weight: 300
+
+.tg
+  @include tg
+  text-transform: uppercase
+
