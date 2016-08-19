@@ -31,6 +31,10 @@ const config = {
       {
         test: /\.(eot|svg|ttf|woff|woff2|jpe?g|png)$/,
         loader: 'file?name=[path][name].[ext]'
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'file?name=[path][name].[ext]'
       }
       // if you don't like src in path you can use this instead - life's too short IMO
       // {

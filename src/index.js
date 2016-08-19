@@ -9,6 +9,7 @@ import reducers from './reducers'
 
 import App from './components/app'
 import Main from './components/main'
+import Round from './components/round'
 
 require('./stylesheets/base.sass')
 
@@ -19,7 +20,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={App}>
-        <IndexRoute component={Main} />
+        // <IndexRoute component={Main} />
+        <Route component={Main}>
+          <Route path='play/:round' component={Round} />
+        </Route>
       </Route>
     </Router>
   </Provider>

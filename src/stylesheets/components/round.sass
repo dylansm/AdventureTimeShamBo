@@ -1,0 +1,19 @@
+@import '../config/timing'
+
+.round
+  opacity: 0
+  pointer-events: none
+  position: absolute
+  top: 0rem
+  transition: opacity $normal-speed ease-out
+  width: 100%
+
+  #arrows
+    path
+      opacity: 0
+      transition: opacity $normal-speed ease-out
+
+.main-wrap.rounds
+  .round
+    opacity: 1
+    pointer-events: all

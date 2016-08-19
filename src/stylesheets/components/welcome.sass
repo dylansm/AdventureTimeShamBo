@@ -1,0 +1,13 @@
+@import '../config/timing'
+
+.welcome
+  position: relative
+  opacity: 1.0
+  top: 0
+  transition: opacity $normal-speed ease-out
+
+
+.main-wrap.rounds
+  .welcome
+    opacity: 0
+    pointer-events: none

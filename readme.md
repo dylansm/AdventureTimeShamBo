@@ -16,6 +16,8 @@ Play the demo here.
 
 ### Run locally
 
+#### Requirements: NodeJS > v5. For best results, use NodeJS version 6.1+
+
 Clone or download repository and issue the following to install dependencies:
 
 ```
