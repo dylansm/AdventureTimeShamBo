@@ -1,19 +1,87 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { chooseCharacter } from '../actions/rounds'
+import { chooseCharacter, nextRound, playRound } from '../actions/rounds'
+import { browserHistory } from 'react-router'
 
 require('../stylesheets/components/round.sass')
 
 class Round extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      currentRound: this.props.currentRound,
+      playStarted: false,
+      roundComplete: false,
+      statusMessage: 'Waiting...'
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({ playStarted: nextProps.playStarted })
+    if (nextProps.statusMessage) {
+      this.setState({ statusMessage: nextProps.statusMessage })
+    }
+
+    if (nextProps.roundComplete) {
+      this.setState({ roundComplete: true })
+    }
+
+    if (nextProps.currentRound && nextProps.currentRound !== this.state.currentRound) {
+      browserHistory.push(`/play/${nextProps.currentRound}`)
+      this.setState({ currentRound: nextProps.currentRound })
+      this.resetState(nextProps.currentRound)
+    }
+  }
+
   handleCharacterClick (e) {
+    if (!this.state.playStarted) {
+      this.setState({ statusMessage: "Let's make this fair. Click the play button first."})
+      return
+    }
+
+    if (this.state.roundComplete) {
+      this.setState({ statusMessage: "This round is complete."})
+      return
+    }
     this.props.chooseCharacter(e.target.id)
   }
 
+  nextRound () {
+    if (this.state.roundComplete) {
+      this.props.nextRound(this.state.currentRound + 1)
+    }
+  }
+
+  playRound () {
+    if (this.state.playStarted || this.state.roundComplete) return
+    this.props.playRound()
+  }
+
+  renderPlayMessage () {
+    return (
+      <h3>{this.state.statusMessage}</h3>
+    )
+  }
+
+  resetState (nextRoundNum) {
+    this.setState({playStarted: false, roundComplete: false, statusMessage: `Waiting to start round ${nextRoundNum}...`})
+  }
+
   render() {
+    const classNames = require('classnames')
+    const playClasses = classNames('btn ctr', this.props.className, {
+      'disabled btn-default': this.state.roundComplete,
+      'btn-primary': !this.state.roundComplete
+    })
+    const nextClasses = classNames('btn ctr', this.props.className, {
+      'disabled btn-default': !this.state.roundComplete,
+      'btn-primary': this.state.roundComplete,
+    })
     return (
       <div className='round'>
-        <h2>Round {this.props.currentRound}</h2>
+        <h2>Round {this.state.currentRound}</h2>
 
         <svg width="100%" viewBox="0 0 689 666" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -50,17 +118,29 @@ class Round extends Component {
                 </g>
             </g>
         </svg>
+
+        <div className='input-group'>
+          {this.renderPlayMessage()}
+          <button className={playClasses} onClick={this.playRound.bind(this)}>Play</button>
+          <button className={nextClasses} onClick={this.nextRound.bind(this)}>Next Round</button>
+        </div>
       </div>
     )
   }
 }
 
 function mapStateToProps (state) {
-  return { currentRound: state.rounds.currentRound }
+  return {
+    currentRound: state.rounds.currentRound,
+    // currentRound: state.rounds.nextRound,
+    playStarted: state.rounds.playStarted,
+    roundComplete: state.rounds.roundComplete,
+    statusMessage: state.rounds.statusMessage
+  }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ chooseCharacter }, dispatch)
+  return bindActionCreators({ chooseCharacter, nextRound, playRound }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Round)

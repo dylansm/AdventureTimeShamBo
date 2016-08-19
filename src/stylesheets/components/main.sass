@@ -1,6 +1,8 @@
 @import '../config/timing'
 @import '../modules/buttons'
 
+@import '../vendor/bootstrap'
+
 .main
   background-color: #fff
   margin: 0 auto
@@ -26,6 +28,26 @@
   width: 100%
 
 .main-wrap.rounds
+  min-height: 600px
+
   .round
     opacity: 1
+    text-align: center
     transition: opacity $normal-speed ease-out
+
+    svg
+      max-width: 500px
+      margin: 0 auto
+
+    h2
+      text-align: left
+
+@include media-breakpoint-up(md)
+  .main-wrap.rounds
+    // min-height: 550px
+    // padding-top: 56%
+
+// @include media-breakpoint-down(sm)
+  // .main-wrap.rounds
+    // min-height: 400px
+    // padding-top: 56%

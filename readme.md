@@ -10,10 +10,6 @@ This demo is a ReactJS application that runs a Ro-Sham-Bo-style game with five n
 
 There are ten rounds of play and a final score. As you play, feel free to go back and revisit the outcomes of previous rounds.
 
-### Play
-
-Play the demo here.
-
 ### Run locally
 
 #### Requirements: NodeJS > v5. For best results, use NodeJS version 6.1+
