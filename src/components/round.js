@@ -56,7 +56,7 @@ class Round extends Component {
 
   playRound () {
     if (this.state.playStarted || this.state.roundComplete) return
-    this.props.playRound()
+    this.props.playRound(this.state.currentRound)
   }
 
   renderPlayMessage () {
